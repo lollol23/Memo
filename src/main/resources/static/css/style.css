@@ -1,0 +1,22 @@
+
+#wrap {
+	width:1200px;
+	height:800px;
+	margin:auto;
+}
+
+header {
+	height:70px;
+}
+
+.login-box {
+	width:400px;
+}
+
+.content {
+	height:400px;
+}
+
+footer {
+	height:50px;
+}
