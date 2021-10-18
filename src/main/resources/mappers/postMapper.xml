@@ -4,20 +4,156 @@
  
  <mapper namespace="com.lollol23.memo.post.dao.PostDAO">
  	<insert id="insertPost" parameterType="map">
- 		INSERT INTO `post`
- 		(
+		INSERT INTO `post`
+ 		( 
  			`userId`
  			, `subject`
  			, `content`
+ 			, `imagePath`
  			, `createdAt`
  			, `updatedAt`
- 		) VALUES (
+ 		) VALUES ( 
  			#{userId}
  			, #{subject}
  			, #{content}
+ 			, #{imagePath}
  			, now()
  			, now()
  		)
  		
  	</insert>
+ 	
+ 	<select id="selectMemoList" parameterType="int" 
+ 	resultType="com.lollol23.memo.post.model.Post">
+ 		SELECT 
+ 			`id`
+ 			, `userId`
+ 			, `subject`
+ 			, `content`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`post`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY `id` DESC
+		LIMIT 3
+ 	
+ 	</select>
+ 	
+ 	<select id="selectMemoListByNextId" parameterType="map" 
+ 	resultType="com.lollol23.memo.post.model.Post">
+ 		SELECT 
+ 			`id`
+ 			, `userId`
+ 			, `subject`
+ 			, `content`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`post`
+		WHERE
+			<![CDATA[
+				`userId` = #{userId}
+				AND `id` < #{nextId}
+			]]>
+			
+		ORDER BY `id` DESC
+		LIMIT 3
+ 	</select>
+ 	
+ 	<select id="selectMemoListByPrevId" parameterType="map" 
+ 	resultType="com.lollol23.memo.post.model.Post">
+ 		SELECT 
+ 			`id`
+ 			, `userId`
+ 			, `subject`
+ 			, `content`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`post`
+		WHERE
+			<![CDATA[
+				`userId` = #{userId}
+				AND `id` > #{prevId}
+			]]>
+			
+		ORDER BY `id`
+		LIMIT 3
+ 	</select>
+ 	
+ 	<select id="lastPost" parameterType="int" 
+ 	resultType="com.lollol23.memo.post.model.Post">
+ 		SELECT 
+ 			`id`
+ 			, `userId`
+ 			, `subject`
+ 			, `content`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`post`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY `id`
+		LIMIT 1
+ 	</select>
+ 	
+ 	<select id="firstPost" parameterType="int" 
+ 	resultType="com.lollol23.memo.post.model.Post">
+ 		SELECT 
+ 			`id`
+ 			, `userId`
+ 			, `subject`
+ 			, `content`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`post`
+		WHERE
+			`userId` = #{userId}
+		ORDER BY `id` DESC
+		LIMIT 1
+ 	</select>
+ 	
+ 	<select id="selectMemo" parameterType="map" resultType="com.lollol23.memo.post.model.Post">
+ 		SELECT 
+ 			`id`
+ 			, `userId`
+ 			, `subject`
+ 			, `content`
+ 			, `imagePath`
+ 			, `createdAt`
+ 			, `updatedAt`
+ 		FROM
+ 			`post`
+		WHERE
+			`userId` = #{userId}
+			AND `id` = #{id}
+ 	</select>
+ 	
+ 	<update id="updatePost" parameterType="map">
+ 		UPDATE
+ 			`post`
+ 		SET
+ 			`subject` = #{subject}
+ 			, `content` = #{content}
+ 		WHERE
+ 			`id` = #{id}
+ 	
+ 	</update>
+ 	
+ 	<delete id="deletePost" parameterType="int">
+ 		DELETE FROM `post`
+ 		WHERE 
+ 			`id` = #{id} 
+ 			AND `userId` = #{userId}
+ 	
+ 	</delete>
  </mapper>
