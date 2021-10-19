@@ -12,7 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class FileManagerService {
 	
-	private final String FILE_UPLOAD_PATH = "C:\\Users\\lis\\Desktop\\Spring\\SpringTest\\upload\\img/";
+	public final static String FILE_UPLOAD_PATH = "D:\\lollol\\upload\\memo/";
 	public String saveFile(int userId, MultipartFile file) {
 		//파일경로
 		//1.올린사람의 id로 구분 저장

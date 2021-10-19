@@ -24,35 +24,22 @@
 				<h1 class="text-center">메모 리스트</h1>
 				<table class="table text-center">
 					<thead>
+						<tr>
+							<th>no.</th>
+							<th>제목</th>
+							<th>날짜</th>
+						</tr>
+					</thead>
+					<tbody>
 						<c:forEach var="memo" items="${memoList }" varStatus="status">
 						<tr>
-							<td>${memo.id }</td>
+							<td>${memoList.size() - status.count + 1}</td>
 							<td><a href="/post/detail_view?id=${memo.id }"> ${memo.subject } </a></td>
 							<td><fmt:formatDate value="${memo.createdAt }" pattern="yyyy-MM-dd HH:mm:ss" /></td>
 						</tr>
 						</c:forEach>
-					</thead>
-					<tbody>
-					
 					</tbody>
 				</table>
-				<div class="d-flex justify-content-between">
-					
-					<div>
-						<c:if test="${prevId ne 0 }">
-							<a href="/post/memoList_view?prevId=${prevId }">&lt;이전</a>
-						</c:if>
-					</div>
-					
-					
-					
-					<div class="text-right">
-						<c:if test="${nextId ne 0}">
-							<a href="/post/memoList_view?nextId=${nextId }">다음> </a>
-						</c:if>
-					</div>
-					
-				</div>
 				<div class="text-right">
 					<a class="btn btn-info" href="/post/create_view">글쓰기</a>
 				</div>

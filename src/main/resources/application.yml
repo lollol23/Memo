@@ -8,5 +8,5 @@ spring:
      driver-class-name: com.mysql.cj.jdbc.Driver
      url: jdbc:mysql://localhost:3306/memo?serverTimezone=UTC&characterEncoding=UTF-8
      username: root
-     password: 464673
+     password: root
      
